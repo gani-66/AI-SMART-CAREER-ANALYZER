@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 4%;
+        --foreground: 0 0% 96%;
+        --card: 0 0% 7%;
+        --card-foreground: 0 0% 96%;
+        --popover: 0 0% 6%;
+        --popover-foreground: 0 0% 96%;
+        --primary: 350 80% 50%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 0 0% 12%;
+        --secondary-foreground: 0 0% 96%;
+        --muted: 0 0% 12%;
+        --muted-foreground: 0 0% 62%;
+        --accent: 350 70% 45%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 75% 45%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 14%;
+        --input: 0 0% 12%;
+        --ring: 350 80% 50%;
+        --radius: 0.75rem;
+    }
+    .dark {
+        --background: 0 0% 4%;
+        --foreground: 0 0% 96%;
+        --card: 0 0% 7%;
+        --card-foreground: 0 0% 96%;
+        --popover: 0 0% 6%;
+        --popover-foreground: 0 0% 96%;
+        --primary: 350 80% 50%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 0 0% 12%;
+        --secondary-foreground: 0 0% 96%;
+        --muted: 0 0% 12%;
+        --muted-foreground: 0 0% 62%;
+        --accent: 350 70% 45%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 75% 45%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 14%;
+        --input: 0 0% 12%;
+        --ring: 350 80% 50%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html, body {
+        margin: 0;
+        font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: #0a0a0b;
+        color: hsl(var(--foreground));
+    }
+    code, .mono {
+        font-family: 'JetBrains Mono', monospace;
+    }
+}
+
+/* Ambient backdrop */
+.bg-ambient {
+    background:
+        radial-gradient(circle at 12% 10%, rgba(225, 29, 72, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 88% 90%, rgba(190, 18, 60, 0.12) 0%, transparent 50%),
+        linear-gradient(180deg, #050507 0%, #0a0a0c 100%);
+    min-height: 100vh;
+    position: relative;
+}
+.bg-ambient::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.6 0 0 0 0 0.6 0 0 0 0 0.6 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+.bg-ambient > * {
+    position: relative;
+    z-index: 1;
+}
+
+.glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.glass-strong {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.025) 100%);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.red-glow {
+    box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.35), 0 0 24px rgba(225, 29, 72, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+    color: #fff;
+    border: 1px solid rgba(255, 90, 110, 0.4);
+    box-shadow: 0 8px 24px rgba(225, 29, 72, 0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 32px rgba(225, 29, 72, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+    filter: brightness(1.07);
+}
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-ghost {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: hsl(var(--foreground));
+    transition: background 0.18s ease, border 0.18s ease;
+}
+.btn-ghost:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(225, 29, 72, 0.4);
+}
+
+.divider-red {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(225,29,72,0.5), transparent);
+}
+
+.heading-gradient {
+    background: linear-gradient(135deg, #fff 0%, #f8bcc8 50%, #e11d48 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.score-ring {
+    background:
+        conic-gradient(#e11d48 var(--p, 0%), rgba(255,255,255,0.06) 0);
+    border-radius: 50%;
+    padding: 6px;
+    transition: all 0.6s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.55s ease both; }
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+
+@keyframes pulseRed {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.45); }
+    50% { box-shadow: 0 0 0 14px rgba(225, 29, 72, 0); }
+}
+.pulse-red { animation: pulseRed 1.6s ease-in-out infinite; }
+
+::selection {
+    background: rgba(225, 29, 72, 0.35);
+    color: #fff;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0c; }
+::-webkit-scrollbar-thumb { background: rgba(225, 29, 72, 0.35); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(225, 29, 72, 0.55); }
+
+/* ============================================================
+   Split-flap Flip Clock — copied verbatim from the uploaded ZIP.
+   Only the dark-theme flap tones were retuned to sit inside the
+   Career Analyzer's charcoal + crimson palette; all animation
+   timing, easing, and keyframes are unchanged from the source.
+   ============================================================ */
+.flip-clock {
+    --flap-bg: #1a1a1f;
+    --flap-bg-top: #1f1f25;
+    --flap-bg-bottom: #16161b;
+    --flap-fg: #ffffff;
+    --flap-radius: 12px;
+    --flap-easing: cubic-bezier(0.22, 1, 0.36, 1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cell-gap);
+    perspective: 1400px;
+}
+
+.flip-clock[data-theme="light"] {
+    --flap-bg: #ededed;
+    --flap-bg-top: #f4f4f4;
+    --flap-bg-bottom: #e3e3e3;
+    --flap-fg: #0a0a0a;
+}
+
+/* ---- Card shell ---- */
+.flip-card {
+    position: relative;
+    width: var(--cell-w);
+    height: var(--cell-h);
+    border-radius: var(--flap-radius);
+    transform-style: preserve-3d;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+}
+
+/* ---- Static halves ---- */
+.flip-half {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    background: var(--flap-bg);
+    backface-visibility: hidden;
+}
+
+.flip-half--top {
+    top: 0;
+    border-radius: var(--flap-radius) var(--flap-radius) 0 0;
+    background: var(--flap-bg-top);
+}
+
+.flip-half--bottom {
+    bottom: 0;
+    border-radius: 0 0 var(--flap-radius) var(--flap-radius);
+    background: var(--flap-bg-bottom);
+}
+
+/* ---- Glyph: centered across the full card height, clipped per half ---- */
+.flip-glyph {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--cell-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: var(--cell-font);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--flap-fg);
+    user-select: none;
+}
+
+.flip-half--top .flip-glyph { top: 0; }
+.flip-half--bottom .flip-glyph { bottom: 0; }
+
+/* ---- Animated flaps ---- */
+.flip-flap {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+    z-index: 2;
+}
+
+.flip-flap--top {
+    top: 0;
+    transform-origin: bottom center;
+    border-radius: var(--flap-radius) var(--flap-radius) 0 0;
+    background: var(--flap-bg-top);
+    animation: flip-top var(--flip-duration) var(--flap-easing) forwards;
+}
+
+.flip-flap--top .flip-glyph { top: 0; }
+
+.flip-flap--bottom {
+    bottom: 0;
+    transform-origin: top center;
+    border-radius: 0 0 var(--flap-radius) var(--flap-radius);
+    background: var(--flap-bg-bottom);
+    transform: rotateX(90deg);
+    animation: flip-bottom var(--flip-duration) var(--flap-easing) forwards;
+}
+
+.flip-flap--bottom .flip-glyph { bottom: 0; }
+
+/* ---- Dynamic lighting shades on the flaps ---- */
+.flip-shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.flip-shade--top {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55) 100%);
+    animation: shade-top var(--flip-duration) var(--flap-easing) forwards;
+}
+
+.flip-shade--bottom {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
+    animation: shade-bottom var(--flip-duration) var(--flap-easing) forwards;
+}
+
+/* ---- Center hinge ---- */
+.flip-hinge {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 3;
+}
+
+.flip-clock[data-theme="light"] .flip-hinge {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+@keyframes flip-top {
+    0%   { transform: rotateX(0deg); }
+    100% { transform: rotateX(-90deg); }
+}
+
+@keyframes flip-bottom {
+    0%  { transform: rotateX(90deg); }
+    /* small settle near the end for mechanical realism */
+    85% { transform: rotateX(-4deg); }
+    100% { transform: rotateX(0deg); }
+}
+
+@keyframes shade-top {
+    0%   { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+@keyframes shade-bottom {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flip-flap {
+        animation: none !important;
+        display: none;
+    }
+}
